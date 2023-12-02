@@ -4,7 +4,7 @@ import tempfile
 import requests
 from PyPDF2 import PdfReader
 from docx import Document
-
+#test
 # Funzione per processare i file PDF
 def process_pdf(file_path):
     reader = PdfReader(file_path)
