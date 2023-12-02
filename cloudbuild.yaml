@@ -1,0 +1,89 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: fun-conv-hf
+  namespace: '997129691180'
+  selfLink: /apis/serving.knative.dev/v1/namespaces/997129691180/services/fun-conv-hf
+  uid: a17d46c9-e0af-429c-b545-2b64f9b8d6e2
+  resourceVersion: AAYLiJiZSE4
+  generation: 5
+  creationTimestamp: '2023-12-02T15:06:16.578406Z'
+  labels:
+    goog-managed-by: cloudfunctions
+    goog-cloudfunctions-runtime: python38
+    cloud.googleapis.com/location: us-central1
+  annotations:
+    run.googleapis.com/custom-audiences: '["https://us-central1-convert-to-text-api.cloudfunctions.net/fun-conv-hf"]'
+    run.googleapis.com/client-name: console-cloud
+    serving.knative.dev/creator: service-997129691180@gcf-admin-robot.iam.gserviceaccount.com
+    serving.knative.dev/lastModifier: service-997129691180@gcf-admin-robot.iam.gserviceaccount.com
+    cloudfunctions.googleapis.com/function-id: fun-conv-hf
+    run.googleapis.com/operation-id: b5a9fba0-3d51-48b9-98f5-0502cd48e1f0
+    run.googleapis.com/ingress: all
+    run.googleapis.com/ingress-status: all
+spec:
+  template:
+    metadata:
+      name: fun-conv-hf-00005-xon
+      labels:
+        run.googleapis.com/startupProbeType: Default
+      annotations:
+        run.googleapis.com/client-name: console-cloud
+        cloudfunctions.googleapis.com/trigger-type: HTTP_TRIGGER
+        autoscaling.knative.dev/maxScale: '100'
+        run.googleapis.com/startup-cpu-boost: 'true'
+    spec:
+      containerConcurrency: 1
+      timeoutSeconds: 60
+      serviceAccountName: 997129691180-compute@developer.gserviceaccount.com
+      containers:
+      - image: us-central1-docker.pkg.dev/convert-to-text-api/gcf-artifacts/fun--conv--hf:version_1
+        ports:
+        - name: http1
+          containerPort: 8080
+        resources:
+          limits:
+            cpu: 167m
+            memory: 256Mi
+        startupProbe:
+          timeoutSeconds: 240
+          periodSeconds: 240
+          failureThreshold: 1
+          tcpSocket:
+            port: 8080
+  traffic:
+  - percent: 100
+    latestRevision: true
+status:
+  observedGeneration: 5
+  conditions:
+  - type: Ready
+    status: 'False'
+    reason: HealthCheckContainerError
+    message: "Revision 'fun-conv-hf-00005-xon' is not ready and cannot serve traffic.\
+      \ The user-provided container failed to start and listen on the port defined\
+      \ provided by the PORT=8080 environment variable. Logs for this revision might\
+      \ contain more information.\n\nLogs URL: https://console.cloud.google.com/logs/viewer?project=convert-to-text-api&resource=cloud_run_revision/service_name/fun-conv-hf/revision_name/fun-conv-hf-00005-xon&advancedFilter=resource.type%3D%22cloud_run_revision%22%0Aresource.labels.service_name%3D%22fun-conv-hf%22%0Aresource.labels.revision_name%3D%22fun-conv-hf-00005-xon%22\
+      \ \nFor more troubleshooting guidance, see https://cloud.google.com/run/docs/troubleshooting#container-failed-to-start"
+    lastTransitionTime: '2023-12-02T15:32:43.904078Z'
+  - type: ConfigurationsReady
+    status: 'True'
+    lastTransitionTime: '2023-12-02T15:32:24.766595Z'
+  - type: RoutesReady
+    status: 'False'
+    reason: HealthCheckContainerError
+    message: "Revision 'fun-conv-hf-00005-xon' is not ready and cannot serve traffic.\
+      \ The user-provided container failed to start and listen on the port defined\
+      \ provided by the PORT=8080 environment variable. Logs for this revision might\
+      \ contain more information.\n\nLogs URL: https://console.cloud.google.com/logs/viewer?project=convert-to-text-api&resource=cloud_run_revision/service_name/fun-conv-hf/revision_name/fun-conv-hf-00005-xon&advancedFilter=resource.type%3D%22cloud_run_revision%22%0Aresource.labels.service_name%3D%22fun-conv-hf%22%0Aresource.labels.revision_name%3D%22fun-conv-hf-00005-xon%22\
+      \ \nFor more troubleshooting guidance, see https://cloud.google.com/run/docs/troubleshooting#container-failed-to-start"
+    lastTransitionTime: '2023-12-02T15:32:43.904078Z'
+  latestReadyRevisionName: fun-conv-hf-00001-piv
+  latestCreatedRevisionName: fun-conv-hf-00005-xon
+  traffic:
+  - revisionName: fun-conv-hf-00001-piv
+    percent: 100
+    latestRevision: true
+  url: https://fun-conv-hf-qmlmblgwgq-uc.a.run.app
+  address:
+    url: https://fun-conv-hf-qmlmblgwgq-uc.a.run.app
